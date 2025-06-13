@@ -1,0 +1,73 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Thống kê";
+}
+
+<h2>Thống kê Dịch vụ</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mã Dịch vụ</th>
+            <th>Tên Dịch vụ</th>
+            <th>Tổng 2024</th>
+            <th>Tổng Tháng 12/2024</th>
+            <th>Tổng Tuần Hiện Tại</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.DichVuStats != null)
+        {
+            foreach (var item in ViewBag.DichVuStats)
+            {
+                <tr>
+                    <td>@item.Servicecode</td>
+                    <td>@item.Servicename</td>
+                    <td>@item.Total2024</td>
+                    <td>@item.TotalDec2024</td>
+                    <td>@item.TotalCurrentweek</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="5">Không có dữ liệu</td></tr>
+        }
+    </tbody>
+</table>
+
+<h2>Thống kê Sử dụng Nhiệm vụ</h2>
+<div class="card">
+    <div class="card-body">
+        <p><strong>Đã sử dụng:</strong> @ViewBag.SuDungStats?.SoluongDasudung</p>
+        <p><strong>Chưa sử dụng:</strong> @ViewBag.SuDungStats?.SoluongChuasudung</p>
+    </div>
+</div>
+
+<h2>Thống kê Nhiệm vụ theo Thiết bị</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mã Thiết bị</th>
+            <th>Tên Thiết bị</th>
+            <th>Tổng Số Nhiệm vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.ThietBiStats != null)
+        {
+            foreach (var item in ViewBag.ThietBiStats)
+            {
+                <tr>
+                    <td>@item.Devicecode</td>
+                    <td>@item.Devicename</td>
+                    <td>@item.TongsoNhiemvu</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="3">Không có dữ liệu</td></tr>
+        }
+    </tbody>
+</table>
